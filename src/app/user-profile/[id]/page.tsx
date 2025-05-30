@@ -45,14 +45,14 @@ const userPostsBlockBottom = cva(
   }
 );
 
-const post: Post = {
-  title: "My post",
-  content:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, voluptas?",
-  likes: 10,
-  repostes: 5,
-  date: "2025-03-28T09:07:45",
-};
+// const post: Post = {
+//   title: "My post",
+//   content:
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, voluptas?",
+//   likes: 10,
+//   repostes: 5,
+//   date: "2025-03-28T09:07:45",
+// };
 
 export default function UserProfile() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -76,17 +76,17 @@ export default function UserProfile() {
     fetchPosts();
   }, []);
 
-  const createPost = async () => {
-    try {
-      const res = await fetch("/api/user-profile/1", {
-        method: "POST",
-        body: JSON.stringify(post),
-      });
-      console.log(res);
-    } catch (error) {
-      console.error("Ошибка при публикации поста: ", error);
-    }
-  };
+  // const createPost = async () => {
+  //   try {
+  //     const res = await fetch("/api/user-profile/1", {
+  //       method: "POST",
+  //       body: JSON.stringify(post),
+  //     });
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.error("Ошибка при публикации поста: ", error);
+  //   }
+  // };
 
   return (
     <section className={userProfile()}>
