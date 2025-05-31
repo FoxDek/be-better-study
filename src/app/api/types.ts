@@ -5,7 +5,7 @@ export type PostFromServer = {
   content: string;
   likes: number;
   repostes: number;
-  date: string | number; // Обязательное поле
+  date: string | number;
   id: string;
 };
 
@@ -15,5 +15,5 @@ export type PostToCreate = {
   content: string;
   likes?: number;
   repostes?: number;
-  date?: never; // или просто не указываем
+  date?: never;
 };

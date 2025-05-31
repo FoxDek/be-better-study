@@ -1,7 +1,7 @@
-import { Post } from "@/app/api/types";
+import { PostToCreate } from "@/app/api/types";
 
   
-  export const createPost = async (post: Post) => {
+  export const createPost = async (post: PostToCreate) => {
     try {
       const res = await fetch("/api/user-profile/1", {
         method: "POST",
