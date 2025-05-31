@@ -1,10 +1,11 @@
 "use client";
 import { cva } from "class-variance-authority";
 import { useEffect, useState } from "react";
-import { Post } from "../../api/types";
+import { PostFromServer } from "../../api/types";
 import UserPosts from "../../components/UserPosts";
 import AboutUserBlock from "../../components/AboutUserBlock";
 import Search from "@/assets/search.svg";
+import { useParams, useRouter } from "next/navigation";
 
 const userProfile = cva("flex gap-10 h-full");
 const userPostsBlock = cva("user-posts-block w-full flex flex-col gap-5");
@@ -55,16 +56,24 @@ const userPostsBlockBottom = cva(
 // };
 
 export default function UserProfile() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostFromServer[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchIsOpen, setSearchIsOpen] = useState<boolean>(false);
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const router = useRouter()
+  const params = useParams();
+  const userId = params.id;
+
+  const newPostHandler = () => {
+    console.log('redirect')
+    router.push(`/user-profile/${userId}/new-post`);
+
+  }
 
   useEffect(() => {
     setIsLoading(true);
     const fetchPosts = async () => {
       try {
-        const res = await fetch("/api/user-profile/1");
+        const res = await fetch(`/api/user-profile/${userId}`);
         const data = await res.json();
         setPosts(data);
         setIsLoading(false);
@@ -74,19 +83,7 @@ export default function UserProfile() {
     };
 
     fetchPosts();
-  }, []);
-
-  // const createPost = async () => {
-  //   try {
-  //     const res = await fetch("/api/user-profile/1", {
-  //       method: "POST",
-  //       body: JSON.stringify(post),
-  //     });
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.error("Ошибка при публикации поста: ", error);
-  //   }
-  // };
+  }, [userId]);
 
   return (
     <section className={userProfile()}>
@@ -100,7 +97,7 @@ export default function UserProfile() {
             <button className={userPostsBlockButton({ active: searchIsOpen })} onClick={() => setSearchIsOpen(!searchIsOpen)}>
               <Search className={userPostsBlockButtonIcon({ active: searchIsOpen })} />
             </button>
-            <button className={userPostsBlockButton({ active: modalIsOpen })} onClick={() => setModalIsOpen(!modalIsOpen) }>
+            <button className={userPostsBlockButton({ active: false })} onClick={() => (newPostHandler()) }>
               New Post
             </button>
           </div>

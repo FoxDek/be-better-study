@@ -1,0 +1,47 @@
+{
+  "folder-path-color.folders": [
+
+  ],
+  "folder-color.pathColors": [
+    {
+      "folderPath": "node-server-study\\src\\app\\api\\",
+      "color": "foldercolorizer.color_00cc99"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\api\\user-profile\\[id]\\",
+      "color": "foldercolorizer.color_00cc99"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\api\\user-profile\\[id]\\route.ts\\",
+      "color": "foldercolorizer.color_00cc99"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\api\\types.ts\\",
+      "color": "foldercolorizer.color_00cc99"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\components\\",
+      "color": "foldercolorizer.color_ffff00"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\components\\AboutUserBlock.tsx\\",
+      "color": "foldercolorizer.color_ffff00"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\components\\Header.tsx\\",
+      "color": "foldercolorizer.color_ffff00"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\components\\Loader.tsx\\",
+      "color": "foldercolorizer.color_ffff00"
+    },
+    {
+      "folderPath": "node-server-study\\src\\app\\components\\UserPosts.tsx\\",
+      "color": "foldercolorizer.color_ffff00"
+    },
+    {
+      "folderPath": "node-server-study\\src\\assets\\",
+      "color": "foldercolorizer.color_990033"
+    }
+  ]
+}

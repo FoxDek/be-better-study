@@ -23,7 +23,8 @@ export default function AboutUserBlock() {
         className={userPhoto()}
         width={200}
         height={200}
-        layout='responsive'
+        sizes="100vw"
+        priority
       />
       <div className="flex flex-col px-2 gap-5">
         <div className="flex gap-2">
