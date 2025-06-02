@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: [],
+    domains: ['cdn.jsdelivr.net', 'avatars.githubusercontent.com'],
   },
 };
 

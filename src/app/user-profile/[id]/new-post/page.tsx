@@ -2,7 +2,7 @@
 import { cva } from 'class-variance-authority';
 import { useState } from 'react';
 import Cross from "@/assets/cross.svg";
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { createPost } from '@/utils/post';
 import { PostToCreate } from '../../../api/types';
 
@@ -17,6 +17,14 @@ export default function NewPost() {
   const [postTitle, setPostTitle] = useState('')
   const [postDescription, setPostDescription] = useState('')
   const router = useRouter()
+  const params = useParams()
+  
+  const rawId = params.id;
+  if (typeof rawId !== 'string') {
+    alert('Некорректный параметр ID');
+    return null;
+  }
+  const id = rawId;
 
   const handleAddPost = async () => {
     if (postTitle === '') {
@@ -35,7 +43,7 @@ export default function NewPost() {
         repostes: 0,
       }
 
-      await createPost(post)
+      await createPost(post, id)
       alert('Опубликовано')
       router.back()
     } catch (err) {

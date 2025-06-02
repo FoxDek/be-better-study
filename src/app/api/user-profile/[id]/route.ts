@@ -1,48 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PostFromServer } from "@/app/api/types";
 
-const dataDateMap = (posts: PostFromServer[]) => {
-  return posts.map((post) => {
-    let date;
-    if (typeof post.date === "number") {
-      date = new Date(post.date * 1000); // Умножаем на 1000, так как JS использует миллисекунды
-    } else if (typeof post.date === "string") {
-      date = new Date(post.date);
-    } else {
-      date = post.date;
-    }
-
-    return {
-      ...post,
-      date: date.toLocaleString(),
-    };
-  });
-};
-
-export async function GET() {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
+    const { id } = await params;
     const res = await fetch(
-      "https://683761892c55e01d1849aea9.mockapi.io/posts"
+      `https://683761892c55e01d1849aea9.mockapi.io/users-collection/${id}`
     );
     const data = await res.json();
-    const mappedData = dataDateMap(data);
-
-    return NextResponse.json(mappedData);
-  } catch (error) {
-    console.error("Ошибка при выгрузке постов: ", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    
+    return NextResponse.json(data)
+  } catch (err) {
+    console.error(err);
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   try {
+    const { id } = await params;
+    console.log(id)
     const data = await req.json();
 
     const res = await fetch(
-      "https://683761892c55e01d1849aea9.mockapi.io/posts",
+      `https://683761892c55e01d1849aea9.mockapi.io/users-collection/${id}/posts`,
       {
         method: "POST",
         headers: {

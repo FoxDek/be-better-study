@@ -1,24 +1,16 @@
 import { cva } from "class-variance-authority"
 import Image from "next/image"
+import { User } from "../api/types";
 
 const aboutUserBlock = cva("about-user max-w-1/4 flex flex-col gap-5");
 const userName = cva('text-2xl')
 const userPhoto = cva("user-photo w-full h-full object-cover max-w-sm rounded-xl");
 
-const userData = {
-  name: "John",
-  surname: "Doe",
-  age: 30,
-  city: "New York",
-  blog_description: 'My blog about the best things in the world',
-}
-
-
-export default function AboutUserBlock() {
+export default function AboutUserBlock({ userData }: { userData: User }) {
   return (
     <div className={aboutUserBlock()}>
       <Image
-        src={"/user-photo-template.jpg"}
+        src={userData.avatar}
         alt='user photo'
         className={userPhoto()}
         width={200}

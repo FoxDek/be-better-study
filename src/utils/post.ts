@@ -1,13 +1,12 @@
 import { PostToCreate } from "@/app/api/types";
 
   
-  export const createPost = async (post: PostToCreate) => {
+  export const createPost = async (post: PostToCreate, id: string) => {
     try {
-      const res = await fetch("/api/user-profile/1", {
+      await fetch(`/api/user-profile/${id}`, {
         method: "POST",
         body: JSON.stringify(post),
       });
-      console.log(res);
     } catch (error) {
       console.error("Ошибка при публикации поста: ", error);
     }
