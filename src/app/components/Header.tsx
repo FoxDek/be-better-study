@@ -12,7 +12,7 @@ export default function Header() {
     <div className='bg-linear-to-r from-[#8C90D7] to-[#8488CD] p-3'>
       <div className='container mx-auto'>
         <div className='flex items-center gap-5'>
-          <Link href={"/"} className=''>
+          <Link href={"/"}>
             <Logo className={headerIcon()} />
           </Link>
           <span className='text-white text-xl '>be better</span>

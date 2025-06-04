@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
 
+body {
+  user-select: none;
+}
+
 *,
 ::before,
 ::after {
@@ -116,6 +120,29 @@ svg * {
     -webkit-transition-duration: 0.01ms !important;
             transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(270deg,
+    #8085D1,  /* чуть глубже и темнее */
+    #8C90D7,  /* основной цвет */
+    #989CDF,  /* слегка светлее и нежнее */
+    #A4A8E6,  /* лёгкая пастельная вариация */
+    #8C90D7);
+  background-size: 400% 400%;
+  animation: gradientFlow 8s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 

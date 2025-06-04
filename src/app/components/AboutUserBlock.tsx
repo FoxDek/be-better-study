@@ -29,7 +29,7 @@ export default function AboutUserBlock({ userData }: { userData: User }) {
         </div>
         <div className="">
           <label>Blog description:</label>
-          <p className="bg-gray-200 p-2 rounded-xl">{userData.blog_description}</p>
+          <p className="bg-gray-100 p-2 rounded-xl">{userData.blog_description}</p>
         </div>
       </div>
     </div>

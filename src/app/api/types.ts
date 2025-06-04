@@ -4,7 +4,7 @@ export type User = {
   surname: string;
   avatar: string;
   age: number;
-  interests: [];
+  interests: string[];
   city: string;
   blog_description: string;
   sex: string;
