@@ -19,10 +19,10 @@ const dataDateMap = (posts: PostFromServer[]) => {
   });
 };
 
-export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+export async function GET(req: NextRequest, {params}: { params: { id: string } }) {
 
   try {
-    const { id } = await context.params;
+    const { id } = await params;
     const { searchParams } = new URL(req.url);
     const page = searchParams.get("page") || "1";
     const limit = searchParams.get("limit") || "5";
