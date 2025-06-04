@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  {params}: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
+    const id = (await params).id;
     const res = await fetch(
       `https://683761892c55e01d1849aea9.mockapi.io/users-collection/${id}`
     );
@@ -17,9 +17,9 @@ export async function GET(
   }
 }
 
-export async function POST(req: NextRequest, {params}: { params: { id: string } }) {
+export async function POST(req: NextRequest, {params}: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await params;
+    const id = (await params).id;
     const data = await req.json();
 
     const res = await fetch(
@@ -48,9 +48,9 @@ export async function POST(req: NextRequest, {params}: { params: { id: string } 
 }
 
 
-export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {
+export async function DELETE(req: NextRequest, {params}: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await params;
+    const id = (await params).id;
     const postId = await req.json();
     console.log('Пост на сервере: ', postId)
     

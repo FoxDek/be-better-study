@@ -62,7 +62,7 @@ export default function UserProfile() {
   const [searchIsOpen, setSearchIsOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentlimit, setCurrentlimit] = useState<number>(5);
-  const [postsLength, setPostsLength] = useState<number>(3);
+  const [postsLength, setPostsLength] = useState<number>(0);
   const router = useRouter();
   const params = useParams();
   const userId = params.id;
@@ -84,6 +84,15 @@ export default function UserProfile() {
       const res = await fetch(
         `https://683761892c55e01d1849aea9.mockapi.io/users-collection/${userId}/posts`
       );
+
+      if (res.status === 404) {
+        return setPostsLength(0);
+      }
+      
+      if (!res.ok) {
+        throw new Error(`Ошибка ответа сервера: ${res.status}`);
+      }
+
       const data = await res.json();
 
       const postsLength = data.length;
@@ -99,6 +108,11 @@ export default function UserProfile() {
       const res = await fetch(
         `/api/user-profile/${userId}/posts?page=${currentPage}&limit=${currentlimit}`
       );
+
+      if (!res.ok) {
+        throw new Error(`Ошибка ответа сервера: ${res.status}`);
+      }
+
       const data = await res.json();
       setPosts(data);
     } catch (err) {
@@ -203,7 +217,7 @@ export default function UserProfile() {
             handleDeletePost={handleDeletePost}
           />
         </div>
-        {posts && totalPages > 1 ? <Pagination currentPage={currentPage} pageSize={currentlimit} totalPages={totalPages} onChange={handlePageChange}/> : null}
+        {posts && totalPages > 1 && !postsIsLoading ? <Pagination currentPage={currentPage} pageSize={currentlimit} totalPages={totalPages} onChange={handlePageChange}/> : null}
       </div>
 
     </section>

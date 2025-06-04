@@ -19,10 +19,10 @@ const dataDateMap = (posts: PostFromServer[]) => {
   });
 };
 
-export async function GET(req: NextRequest, {params}: { params: { id: string } }) {
+export async function GET(req: NextRequest, {params}: { params: Promise<{ id: string }> }) {
 
   try {
-    const { id } = await params;
+    const id = (await params).id;
     const { searchParams } = new URL(req.url);
     const page = searchParams.get("page") || "1";
     const limit = searchParams.get("limit") || "5";
@@ -30,6 +30,14 @@ export async function GET(req: NextRequest, {params}: { params: { id: string } }
     const res = await fetch(
       `https://683761892c55e01d1849aea9.mockapi.io/users-collection/${id}/posts?page=${page}&limit=${limit}`
     );
+
+    if (res.status === 404) {
+      return NextResponse.json([]);
+    }
+
+    if (!res.ok) {
+      throw new Error(`Ошибка ответа сервера: ${res.status}`);
+    }
     
     const data = await res.json();
     const mappedData = dataDateMap(data);
